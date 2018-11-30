@@ -25,5 +25,8 @@ class ViewController: UIViewController {
         label.text = "Hello, World!"
     }
     
+    @IBAction func changeScreen(_ sender: Any) {
+        performSegue(withIdentifier: "goToOrange", sender: self)
+    }
 }
 
