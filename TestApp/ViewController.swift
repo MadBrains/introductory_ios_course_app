@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 
     @IBAction func buttonTap(_ sender: Any) {
         label.font = UIFont.systemFont(ofSize: 30)
-        label.text = "Hello, World!"
+        label.text = "Hello, World! Hello, World! Hello, World!"
     }
     
     @IBAction func changeScreen(_ sender: Any) {
