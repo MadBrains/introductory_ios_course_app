@@ -21,9 +21,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func buttonTap(_ sender: Any) {
-        label.font = UIFont.systemFont(ofSize: 30)
-        label.text = "Hello, World! Hello, World! Hello, World!"
-        
         let url = URL(string: "https://cat-fact.herokuapp.com/facts")!
         let task = URLSession.shared.dataTask(with: url, completionHandler: handleResponse)
         task.resume()
@@ -32,12 +29,25 @@ class ViewController: UIViewController {
     func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
         do {
             let values = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, Any>
-            let facts = values["all"] as! Array<Any>
-            print(facts.first!)
+            let jsonFacts = values["all"] as! Array<Any>
+            let facts = mapFacts(jsonFacts: jsonFacts)
+            
+            DispatchQueue.main.async {
+                self.label.text = facts.first!.text
+            }
+            
         } catch {
             print("Что-то пошло не так")
         }
     }
     
+    func mapFacts(jsonFacts: Array<Any>) -> [Fact] {
+        var facts = Array<Fact>()
+        for jsonFact in jsonFacts {
+            let fact = Fact(dictionary: jsonFact as! Dictionary<String, Any>)
+            facts.append(fact)
+        }
+        return facts
+    }
 }
 
