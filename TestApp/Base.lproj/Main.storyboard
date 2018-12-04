@@ -24,13 +24,6 @@
                                     <action selector="buttonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q3J-o3-kwq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5j-D3-XDe">
-                                <rect key="frame" x="283" y="617" width="76" height="30"/>
-                                <state key="normal" title="From Code"/>
-                                <connections>
-                                    <action selector="changeScreen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nhw-qC-YZQ"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBY-Lh-clL">
                                 <rect key="frame" x="52" y="68" width="100" height="30"/>
                                 <constraints>
@@ -43,11 +36,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.12549019610000001" green="0.64705882349999999" blue="0.44705882349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="A5j-D3-XDe" secondAttribute="bottom" constant="20" id="1Ea-WN-dnV"/>
                             <constraint firstItem="F3h-ev-CwP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7xn-pa-uUh"/>
                             <constraint firstItem="TBY-Lh-clL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="JsV-qV-9p2"/>
                             <constraint firstItem="TBY-Lh-clL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="52" id="l41-j0-b9u"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="A5j-D3-XDe" secondAttribute="trailing" constant="16" id="rlI-Ag-OX7"/>
                             <constraint firstItem="F3h-ev-CwP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tKA-p4-Zo6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
