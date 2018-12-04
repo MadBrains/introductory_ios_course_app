@@ -30,9 +30,13 @@ class ViewController: UIViewController {
     }
     
     func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
-        let stringData = String(data: data!, encoding: .utf8)!
-        print("Готово!")
-        print(stringData)
+        do {
+            let values = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, Any>
+            let facts = values["all"] as! Array<Any>
+            print(facts.first!)
+        } catch {
+            print("Что-то пошло не так")
+        }
     }
     
 }
