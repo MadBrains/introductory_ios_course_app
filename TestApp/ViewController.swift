@@ -23,6 +23,16 @@ class ViewController: UIViewController {
     @IBAction func buttonTap(_ sender: Any) {
         label.font = UIFont.systemFont(ofSize: 30)
         label.text = "Hello, World! Hello, World! Hello, World!"
+        
+        let url = URL(string: "https://cat-fact.herokuapp.com/facts")!
+        let task = URLSession.shared.dataTask(with: url, completionHandler: handleResponse)
+        task.resume()
+    }
+    
+    func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
+        let stringData = String(data: data!, encoding: .utf8)!
+        print("Готово!")
+        print(stringData)
     }
     
 }
