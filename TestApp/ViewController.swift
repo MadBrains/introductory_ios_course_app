@@ -44,7 +44,8 @@ class ViewController: UIViewController {
     func mapFacts(jsonFacts: Array<Any>) -> [Fact] {
         var facts = Array<Fact>()
         for jsonFact in jsonFacts {
-            let fact = Fact(dictionary: jsonFact as! Dictionary<String, Any>)
+            let fact = Fact()
+            fact.decode(from: jsonFact as! Dictionary<String, Any>)
             facts.append(fact)
         }
         return facts

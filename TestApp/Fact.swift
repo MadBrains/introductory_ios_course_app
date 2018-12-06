@@ -7,14 +7,19 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Fact {
-    let id: String
-    let text: String
+class Fact: Object {
+    @objc dynamic var id: String = ""
+    @objc dynamic var text: String = ""
 
-    init(dictionary: Dictionary<String, Any>) {
+    func decode(from dictionary: Dictionary<String, Any>) {
         id = dictionary["_id"]! as! String
         text = dictionary["text"]! as! String
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }
 

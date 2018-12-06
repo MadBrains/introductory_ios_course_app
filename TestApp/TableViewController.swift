@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TableViewController: UITableViewController {
+    
+    var realm: Realm { return try! Realm() } 
 
     var facts = Array<Fact>() {
         didSet {
@@ -22,6 +25,9 @@ class TableViewController: UITableViewController {
         let url = URL(string: "https://cat-fact.herokuapp.com/facts")!
         let task = URLSession.shared.dataTask(with: url, completionHandler: handleResponse)
         task.resume()
+        
+        let factsFromDB = realm.objects(Fact.self)
+        print(factsFromDB)
     }
     
     func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
@@ -31,20 +37,31 @@ class TableViewController: UITableViewController {
             let newFacts = mapFacts(jsonFacts: jsonFacts)
             
             DispatchQueue.main.async {
+                
+                self.addToRealm(facts: newFacts)
+                
                 self.facts = newFacts
             }
-        } catch {
-            print("Что-то пошло не так")
-        }
+        } catch { print("Что-то пошло не так") }
     }
     
     func mapFacts(jsonFacts: Array<Any>) -> [Fact] {
         var facts = Array<Fact>()
-        for jsonFact in jsonFacts {
-            let fact = Fact(dictionary: jsonFact as! Dictionary<String, Any>)
+        let firstFiveFacts = jsonFacts.prefix(5)
+        for jsonFact in firstFiveFacts {
+            let fact = Fact()
+            fact.decode(from: jsonFact as! Dictionary<String, Any>)
             facts.append(fact)
         }
         return facts
+    }
+    
+    func addToRealm(facts: [Fact]) {
+        do {
+            try realm.write {
+                realm.add(facts, update: true)
+            }
+        } catch { print(error) }
     }
 
     // MARK: - Table view data source
