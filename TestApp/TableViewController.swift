@@ -13,21 +13,14 @@ class TableViewController: UITableViewController {
     
     var realm: Realm { return try! Realm() } 
 
-    var facts = Array<Fact>() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    lazy var facts = realm.objects(Fact.self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let url = URL(string: "https://cat-fact.herokuapp.com/facts")!
-//        let task = URLSession.shared.dataTask(with: url, completionHandler: handleResponse)
-//        task.resume()
-        
-        let factsFromDB = realm.objects(Fact.self)
-        facts = Array(factsFromDB)
+        let url = URL(string: "https://cat-fact.herokuapp.com/facts")!
+        let task = URLSession.shared.dataTask(with: url, completionHandler: handleResponse)
+        task.resume()
     }
     
     func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
@@ -37,10 +30,8 @@ class TableViewController: UITableViewController {
             let newFacts = mapFacts(jsonFacts: jsonFacts)
             
             DispatchQueue.main.async {
-                
                 self.addToRealm(facts: newFacts)
-                
-                self.facts = newFacts
+                self.tableView.reloadData()
             }
         } catch { print("Что-то пошло не так") }
     }
