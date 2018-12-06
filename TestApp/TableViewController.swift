@@ -11,6 +11,8 @@ import RealmSwift
 
 class TableViewController: UITableViewController {
     
+    var selectedFactId: String?
+    
     var realm: Realm { return try! Realm() } 
 
     lazy var facts = realm.objects(Fact.self)
@@ -72,6 +74,12 @@ class TableViewController: UITableViewController {
         cell.textLabel?.text = facts[indexPath.row].text
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedFact = facts[indexPath.row]
+        selectedFactId = selectedFact.id
+        performSegue(withIdentifier: "GoToViewController", sender: self)
     }
 
 }
