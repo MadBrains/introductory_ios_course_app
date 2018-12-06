@@ -56,6 +56,13 @@ class TableViewController: UITableViewController {
             }
         } catch { print(error) }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let vc = segue.destination as? ViewController else {
+            return
+        }
+        vc.factId = selectedFactId
+    }
 
     // MARK: - Table view data source
 
