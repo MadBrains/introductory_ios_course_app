@@ -22,12 +22,12 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = URL(string: "https://cat-fact.herokuapp.com/facts")!
-        let task = URLSession.shared.dataTask(with: url, completionHandler: handleResponse)
-        task.resume()
+//        let url = URL(string: "https://cat-fact.herokuapp.com/facts")!
+//        let task = URLSession.shared.dataTask(with: url, completionHandler: handleResponse)
+//        task.resume()
         
         let factsFromDB = realm.objects(Fact.self)
-        print(factsFromDB)
+        facts = Array(factsFromDB)
     }
     
     func handleResponse(data: Data?, response: URLResponse?, error: Error?) {
